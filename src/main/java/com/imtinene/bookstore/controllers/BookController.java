@@ -1,5 +1,6 @@
 package com.imtinene.bookstore.controllers;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -14,32 +15,37 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.imtinene.bookstore.entities.Book;
 import com.imtinene.bookstore.service.BookService;
-import com.sun.xml.messaging.saaj.packaging.mime.internet.ParseException;
 
 @Controller
 public class BookController {
 	
 	@Autowired
 	BookService bookService;
+	
 	@RequestMapping("/showCreate")
 	public String showCreate()
 	{
 	return "createBook";
 	}
 	@RequestMapping("/saveBook")
-	public String saveProduit(@ModelAttribute("Book") Book book,
-	@RequestParam("date") String date,
-	ModelMap modelMap) throws ParseException, java.text.ParseException
+	
+	
+	public String saveBook(@ModelAttribute("Book") Book book,
+	                       @RequestParam("date") String date,
+	                        ModelMap modelMap) throws ParseException
 	{
 	
-	SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-	Date dateCreation = dateformat.parse(String.valueOf(date));
-	book.setDateCreation(dateCreation);
-	Book saveBook = bookService.saveBook(book);
-	String msg ="book enregistré avec Id "+saveBook.getIdBook();
-	modelMap.addAttribute("msg", msg);
-	return "createBook";
-	}
+		//conversion de la date
+		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+		Date dateCreation = dateformat.parse(String.valueOf(date));
+		book.setDateCreation(dateCreation);
+		Book saveBook = bookService.saveBook(book);
+		String msg ="book enregistré avec Id "+saveBook.getIdBook();
+		modelMap.addAttribute("msg", msg);
+		return "createBook";
+		}
+	
+
 	@RequestMapping("/ListeBook")
 	public String listeBook(ModelMap modelMap,
 			@RequestParam (name="page",defaultValue = "0") int page,

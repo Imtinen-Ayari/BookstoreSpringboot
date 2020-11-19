@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 
 import com.imtinene.bookstore.entities.Book;
+import com.imtinene.bookstore.entities.Genre;
 import com.imtinene.bookstore.repos.BookRepository;
 import com.imtinene.bookstore.service.BookService;
 
@@ -69,4 +70,86 @@ class BookstoreApplicationTests {
 	System.out.println(p);
 	} */
 	}
-}
+	@Test
+	public void testFindBookByNom()
+	{ 
+		List<Book> bos = bookRepository.findByNomBook("dark doors"); 
+		for ( Book b: bos)
+		{
+		System.out.println(b);
+		}
+	}
+	
+	//@Test
+	//public void testFindBookByNomLike()
+	//{ 
+		//List<Book> bos = bookRepository.findByNomBookLike("d"); 
+		//for ( Book b: bos)
+		//{
+		//System.out.println(b);
+		//}
+//	}
+	@Test
+	public void testFindBookByNomContains()
+	{ 
+		List<Book> bos = bookRepository.findByNomBookContains("d"); 
+		for ( Book b: bos)
+		{
+		System.out.println(b);
+		}
+	}
+		
+		@Test
+		public void testFindByNomPrix()
+		{
+		List<Book> bos = bookRepository.findByNomPrix("dark doors", 80.00);
+		for (Book b : bos)
+		{
+		System.out.println(b);
+		}
+		}
+		
+		@Test
+		public void testfindByGenre()
+		{
+		Genre G = new Genre();
+		G.setIdG(1L);
+		List<Book> bos = bookRepository.findByGenre(G);
+		for (Book b : bos)
+		{
+		System.out.println(b);
+		}
+		}
+		
+		@Test
+		public void findByGenreIdG()
+		{
+		List<Book> bos = bookRepository.findByGenreIdG(1L);
+		for (Book b : bos)
+		{
+		System.out.println(b);
+		}
+		}
+		
+		@Test
+		public void testfindByOrderByNomBookAsc()
+		{
+		List<Book> bos =
+		bookRepository.findByOrderByNomBookAsc();
+		for (Book b : bos)
+		{
+		System.out.println(b);
+		}
+		}
+		
+		@Test
+		public void testTrierBooksNomsPrix()
+		{
+		List<Book> bos = bookRepository.trierBooksNomsPrix();
+		for (Book b : bos)
+		{
+		System.out.println(b);
+		}
+		}
+		
+	}
