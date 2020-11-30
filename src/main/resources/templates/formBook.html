@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+<meta charset="utf-8">
+<title>Ajout Books</title>
+</head>
+<body>
+	<div layout:fragment="Mycontent">
+		<div class="container mt-5">
+			<div class="card">
+				<div class="card-header" th:if="${mode=='new'}">**Ajout Books**</div>
+				<div class="card-header" th:if="${mode=='edit'}">**Edit Books**</div>
+				<div class="card-body">
+					<form th:action="@{saveBook}" method="post">
+						<div class="form-group">
+							<label class="control-label" hidden>ID Book :</label> <input
+								type="hidden" name="idBook" class="form-control"
+								th:value="${book.idBook}" />
+						</div>
+						<div class="form-group">
+							<label class="control-label">Nom Book :</label> 
+							<input	type="text" name="nomBook" class="form-control"
+							th:value="${book.nomBook}" />
+						<span th:errors= ${book.nomBook} class="text-danger"> </span>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Prix Book :</label> 
+							<input	 type="text" name="prixBook" class="form-control"
+							th:value="${book.prixBook}" />
+					<span th:errors= ${book.prixBook} class="text-danger"> </span>
+						</div>
+						<div class="form-group">
+							<label class="control-label">date création :</label> 
+							<input	type="date" name="dateCreation" class="form-control"
+							th:value="${book.dateCreation}" />
+						<span th:errors= ${book.dateCreation} class="text-danger"> </span>
+						</div>
+						<div>
+							<button type="submit" class="btn btn-primary">Valider</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

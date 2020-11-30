@@ -24,8 +24,10 @@ List of books
 <tr th:each="b:${books.content}">
 <td th:text="${b.idBook}"></td>
 <td th:text="${b.nomBook}"></td>
-<td th:text="${b.dateCreation}">
-<td th:text="${b.prixBook}"></td></td>
+<td th:text="${b.dateCreation}"></td>
+<td th:text="${b.prixBook}"></td>
+<td><a class="btn btn-success"
+th:href="@{modifierBook(id=${b.idBook})}">Editer</a></td>
 <td><a class="btn btn-danger" onclick="return confirm('Etes-vous sûr ?')" 
 th:href="@{supprimerBook(id=${b.idBook},
  page=${currentPage},size=${size})}">Supprimer</a></td>
